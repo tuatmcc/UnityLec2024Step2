@@ -31,6 +31,7 @@ Unityちゃんアスレチックゲームを作る。
 * PostProcessing
 * Lightings
 * UIToolkit
+* Wind Zone
 
 ## ゲーム仕様
 
