@@ -23,3 +23,9 @@ Unityちゃんアスレチックゲームを作る。
 * TextMeshPro
 * Timeline
 * Cinemachine
+
+## ゲーム仕様
+
+Unityちゃんが障害物を避けながらアイテムを回収してくるゲーム
+
+HP が 0 になるとゲームオーバー
