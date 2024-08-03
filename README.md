@@ -12,6 +12,7 @@ Unityちゃんアスレチックゲームを作る。
 
 ## 学ぶこと
 
+* EditorLayout
 * Animation
 * Physics
 * AudioMixer
