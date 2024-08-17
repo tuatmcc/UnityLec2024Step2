@@ -25,13 +25,11 @@ Unityちゃんアスレチックゲームを作る。
 * Timeline
 * Cinemachine
 * Terrain
-* Tree
 * Skybox
 * DepthCamera
 * PostProcessing
 * Lightings
 * UIToolkit
-* Wind Zone
 
 ## ゲーム仕様
 
