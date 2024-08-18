@@ -118,3 +118,50 @@ UnityChan をインポートしたとき同様。ダウンロードしたファ�
 
 ![alt text](./img/4.3.1.webp)
 
+
+# 5. Trrain で地形を作る
+
+ここでは、Terrain を使って地形を作ります。
+
+Terrain は、 Unity で簡単に地形や植生といった世界を構築するためのツールです。
+
+## 5.1. Terrain を作る
+
+まず、 Prefab いれるフォルダを作り、ステージ用のプレハブを作ります。
+
+`Assets` の `UnityChanAdventure` 内で右クリック -> `Create` -> `Folder` を選択し、 `Prefabs` と入力して `Enter` キーを押します。(`Prefabs` の `P` は大文字です。)
+
+作った `Prefabs` フォルダで右クリック -> `Create` -> `Prefab` を選択し、 `Stage` と入力して `Enter` キーを押します。 `Stage` プレハブができたらダブルクリックして開きます。なにもない世界が `Scene` タブに出れば OK です。次に `Hierarchy` で右クリック -> `3D Object` -> `Terrain` を選択します。すると、大きな板(地面)ができます。
+
+![alt text](./img/5.1.1.webp)
+
+## 5.2. Terrain に草を生やす
+
+Terrain に草を生やします。
+
+ヒエラルキーでTerrainオブジェクトを選択し、インスペクターで `Peint Terrain` を選択し、`Set Hight` になってるところを `Paint Texture` に変更します。そして、 `Terrain Layers` で `Edit Terrain Layers` を押し、`Create Layer` を押します。プロジェクト内の画像一覧が表示されるので、草の画像を選択します。
+
+![alt text](./img/5.2.1.webp)
+
+草が生えました！草のテクスチャは `/Assets/UnityChanAdventure/Textures/TerrainGrass` の中にあります。Terrain のレイヤーデータはこのフォルダに作られます。このファイルの名前を変えると、レイヤーの名前も変わります。以下の画像ではレイヤー名を `Kusa` に変更しています。
+
+![alt text](./img/5.2.2.webp)
+
+## 5.3. Terrain に地形を作る
+
+Terrain に地形を作ります。ヒエラルキーでTerrainオブジェクトを選択し、インスペクターで `Peint Terrain` を選択し、先ほど`Paint Texture` にしたところを `Set Hight` に変更します。Treein の地形は、イラスト書くようにブラシで書くことができます。`Height` はブラシで書ける最大の高さで、 `Brushes` はブラシの形を選べます。`Brush Size` はブラシの大きさ、`Opacity` はブラシの濃さ(強さ)です。好きなブラシで強さ、サイズをセットし、 Scene で Terrain にクリックして地形を作ります。あまり高くしすぎると Unityちゃんが登れなくなってしまうので注意してください。
+
+![alt text](./img/5.3.1.webp)
+
+## 5.4. Terrain をシーンに置く
+
+Terrain をシーンに置きます。`/Assets/UnityChanAdventure` に `Scenes` フォルダを作り、その中に `Main` シーンを作ります。そしてダブルクリックで `Main` シーンを開いてください。
+
+![alt text](./img/5.4.1.png)
+
+次に、先程作成した `Stage` プレハブを `Hierarchy` にドラッグアンドドロップします。
+
+![alt text](./img/5.4.2.webp)
+
+これで、Terrain がシーンに置かれました。
+
