@@ -165,3 +165,56 @@ Terrain をシーンに置きます。`/Assets/UnityChanAdventure` に `Scenes` 
 
 これで、Terrain がシーンに置かれました。
 
+# 6. Unityちゃんをシーンに置く
+
+ここでは、Unityちゃんをシーンに置きます。そして、Chinemachine を使ってカメラを設定し、Animation を使って Unityちゃんを動かします。
+
+## 6.1. Unityちゃんのプレハブを作る
+
+Unityちゃんのモデルの本体は `/Assets/UnityChan/Models` の中にあります。このモデルをプレハブにして、シーンに置きます。`UnityChan` を右クリックして、`Create -> PrefabVariant` を選択します。`UnityChan` プレハブができたら、`UnityaChanAventur` の `Prefabs` フォルダにドラッグアンドドロップして移動させてください。
+
+![alt text](./img/6.1.1.webp)
+
+移動させたらだぶるクリックして開きます。 unitychan の中には `Character1_Reference` と `mesh_root` があります。▼をクリックするとツリーをたたむことができます。 `Character1_Reference` は Unityちゃんのボーン情報で、 `mesh_root` は Unityちゃんの各パーツのモデルデータです。(3Dモデルの仕組みについてはこのUnity講習会では詳しく触れません。「スキニング」とか「リギング」って検索すると色々出てきます)
+
+`unitychan` に Rigidbody と Capsule Collider を追加します。`unitychan` を選択して、インスペクターの `Add Component` をクリックし、`Rigidbody` を追加します。次に、`Add Component` をクリックし、`Capsule Collider` を追加します。
+
+Rigidbody では、 `Constraints` の `Freeze Rotation` の `X`, `Z` をチェックします。これで Unityちゃんが回転しなくなります。Capsule Collider は、Unityちゃんの当たり判定を表します。Unityちゃんの形に合わせて調整します。`Center` を `(0, 0.8, 0)` に、`Radius` を `0.2` に、`Height` を `1.6` にします。
+
+![alt text](./img/6.1.2.webp)
+
+Mainシーンを開いてUnityちゃんのプレハブを置きましょう。`<`を押せば Main シーンに戻ります。`UnityChan` プレハブを `Hierarchy` にドラッグアンドドロップします。
+
+![alt text](./img/6.1.3.webp)
+
+# 7. Unityちゃんを `WASD` で動かす
+
+ここでは、Unityちゃんを `WASD` で動かすスクリプトを書きます。キー入力には `InputSystem` を使います。
+
+## 7.1. InputSystem をインストール
+
+`Window` -> `Package Manager` で `Package Manager` を開きます。`Packages` を `Unity Registry` に変更し、`InputSystem` の `Install` ボタンを押します。
+
+![alt text](./img/7.1.1.webp)
+
+`Edid` -> `Project Settings` で、 `Input System Package` を選択し、`Create settings asset` チェックボックスをオンにします。
+
+![alt text](./img/7.1.2.webp)
+
+`Assets` で UnityChanAdventure フォルダ内で右クリック -> `Create` -> `Input Actions` を選択し、Input Action Assets を作ります。名前は `Main` と入力してください。
+
+![alt text](./img/7.1.3.png)
+
+## 7.2. キー設定
+
+Input Action Assets を開いて、Action Map の `+` ボタンを押して Action Map を追加します。名前は `Main` と入力してください。`Main` を選択して、 Actions にある `New Action` を `Move` に名前を変えてください(ダブルクリックすると変えられます)。`Action Properties` で `Action` の `Action Type` を `Button` から `Value` に変更して、 `Control Type` を `Vector2` に変更します(Control Type は Action Type を Value にしたら出てきます)。
+
+![alt text](./img/7.2.1.webp)
+
+`<No Binding>` は使わないので右クリックで消しちゃってOKです。
+
+![alt text](./img/7.2.2.png)
+
+`Move` の `+` を押して `Add Up\Down\Reft\Right Composite` を追加します。名前は `2D Vector` から `WASD` に変更します。
+
+![alt text](./img/7.2.3.webp)
