@@ -218,3 +218,74 @@ Input Action Assets を開いて、Action Map の `+` ボタンを押して Acti
 `Move` の `+` を押して `Add Up\Down\Reft\Right Composite` を追加します。名前は `2D Vector` から `WASD` に変更します。
 
 ![alt text](./img/7.2.3.webp)
+
+`WASD` の `Up` を選択し、 Path の何も無いところをクリックして、出てきた左端の部分をクリックします (見にくいですが、Unityのバグのせいです)。そして、キーボードの `W` キーを押します。これで `W` キーが `Up` に割り当てられました。同様に、`A` キーを `Left`、`S` キーを `Down`、`D` キーを `Right` に割り当てます。
+
+![alt text](./img/7.2.4.webp)
+
+Unity のバグで見にくい部分ですが、本来は `Listen` と書いてあります。以下の画像は Unity のバグを修正したやつです。これを押すと入力されたキーが割り当てられます。キーボード以外にも、アケコンやゲームパッドなども割り当てることができます。(バグの原因は Unity Editor のプログラムのスペルミスでした。)
+
+![alt text](./img/7.2.5.png)
+
+WASD 全てに割り当てたらこんなかんじになります。
+
+![alt text](./img/7.2.6.png)
+
+## 7.3. GameManager を作る
+
+`Assets` で /Assets/UnityChanAdventure/Prefabs フォルダ内で右クリック -> `Create` -> `Prefab` を選択し、`GameManager` と入力してください。ダブルクリックして開いてください。そしてダブルクリックで開いて、`Add Component` を押して、`Player Input` を追加します。そして `Actions` に `Main` をドラッグアンドドロップします。
+
+![alt text](./img/7.3.1.webp)
+
+## 7.4. Unityちゃんを動かすスクリプトを書く
+
+`Assets` で /Assets/UnityChanAdventure/Scripts フォルダ内で右クリック -> `Create` -> `C# Script` を選択し、`UnityChanController` と入力してください(大文字小文字に気をつけてください)。ダブルクリックして開いてください。以下のスクリプトを書いてください。
+
+```csharp title="UnityChanController.cs"
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+public class UnityChanController : MonoBehaviour
+{
+    private Rigidbody rb;
+    private float speed;
+    private float rotationSpeed;
+    private Vector2 moveInput;
+
+    [SerializeField] private float moveSpeedConst = 5.0f;
+    [SerializeField] private float rotationSpeedConst = 5.0f;
+
+    void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
+
+    void FixedUpdate()
+    {
+        speed = moveInput.y * moveSpeedConst;
+        rotationSpeed = moveInput.x * rotationSpeedConst;
+
+        rb.velocity = transform.forward * speed + new Vector3(0f, rb.velocity.y, 0f);
+        rb.angularVelocity = new Vector3(0, rotationSpeed, 0);
+    }
+
+    public void OnMove(InputAction.CallbackContext context)
+    {
+        moveInput = context.ReadValue<Vector2>();
+    }
+}
+```
+
+Unityちゃん のプレハブを開いてください。 `UnityChanController` スクリプトを Unityちゃんのプレハブにアタッチします。`UnityChanController` を `unitychan` にドラッグアンドドロップします。すると、`unitychan` に `UnityChanController` がアタッチされます。
+
+![alt text](./img/7.4.1.webp)
+
+Main シーンに `GameManager` プレハブを置いてください。`GameManager` を選択して、`GameManager` のインスペクターの `Player Input` で、 `Behaavior` を `Invoke Unity Events` にして、 `Events` -> `Main` -> `Move` で `+` を押して、 Main シーンにある `unitychan` をドラッグアンドドロップします。そして、 `nofunction` を `UnityChanController` の `OnMove` に変更します。
+
+![alt text](./img/7.4.2.webp)
+
+実行して、 `WASD` で Unityちゃんが動くことを確認してください。
+
+![alt text](./img/7.4.1.gif)
