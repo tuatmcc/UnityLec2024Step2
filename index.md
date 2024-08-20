@@ -175,7 +175,7 @@ Unityちゃんのモデルの本体は `/Assets/UnityChan/Models` の中にあ�
 
 ![alt text](./img/6.1.1.webp)
 
-移動させたらだぶるクリックして開きます。 unitychan の中には `Character1_Reference` と `mesh_root` があります。▼をクリックするとツリーをたたむことができます。 `Character1_Reference` は Unityちゃんのボーン情報で、 `mesh_root` は Unityちゃんの各パーツのモデルデータです。(3Dモデルの仕組みについてはこのUnity講習会では詳しく触れません。「スキニング」とか「リギング」って検索すると色々出てきます)
+移動させたらダブルクリックして開きます。 unitychan の中には `Character1_Reference` と `mesh_root` があります。▼をクリックするとツリーをたたむことができます。 `Character1_Reference` は Unityちゃんのボーン情報で、 `mesh_root` は Unityちゃんの各パーツのモデルデータです。(3Dモデルの仕組みについてはこのUnity講習会では詳しく触れません。「スキニング」とか「リギング」って検索すると色々出てきます)
 
 `unitychan` に Rigidbody と Capsule Collider を追加します。`unitychan` を選択して、インスペクターの `Add Component` をクリックし、`Rigidbody` を追加します。次に、`Add Component` をクリックし、`Capsule Collider` を追加します。
 
