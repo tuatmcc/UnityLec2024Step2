@@ -239,7 +239,7 @@ WASD 全てに割り当てたらこんなかんじになります。
 
 ## 7.4. Unityちゃんを動かすスクリプトを書く
 
-`Assets` で /Assets/UnityChanAdventure/Scripts フォルダ内で右クリック -> `Create` -> `C# Script` を選択し、`UnityChanController` と入力してください(大文字小文字に気をつけてください)。ダブルクリックして開いてください。以下のスクリプトを書いてください。
+`Assets` で `/Assets/UnityChanAdventure` で右クリックし、 `Scripts` フォルダーを作り、その Scripts フォルダ内で右クリック -> `Create` -> `C# Script` を選択し、`UnityChanController` と入力してください(大文字小文字に気をつけてください)。ダブルクリックして開いてください。以下のスクリプトを書いてください。
 
 ```csharp title="UnityChanController.cs"
 using System.Collections;
