@@ -289,3 +289,55 @@ Main シーンに `GameManager` プレハブを置いてください。`GameMana
 実行して、 `WASD` で Unityちゃんが動くことを確認してください。
 
 ![alt text](./img/7.4.1.gif)
+
+# 8. Unityちゃんをアニメーションさせる
+
+ここでは、Unityちゃんをアニメーションさせます。
+
+## 8.1. AnimationController を作る
+
+`/Assets/UnityChanAdventure` に `Animationa` フォルダを作り、その中で右クリック -> `Create` -> `Animator Controller` を選択し、`UnityChanAnimatorController` と入力してください。ダブルクリックして開いてください。Unity のアニメーションのステートマシンを編集できます。
+
+![alt text](./img/8.1.1.png)
+
+## 8.2. アニメーションを追加する
+
+Animator で右クリックして、`Create State` -> `Empty` を選択し、ステートを作ってください。作ったステートを選択し。インスペクターから名前を `New State` から `Idle` に変更してください。そして、 `/Assets/UnityChan/Animations` の中にある `Unitychan_WAIT00` の中にある `WAIT00` アニメーションをドラッグアンドドロップして、 `Idle` ステートにアニメーションを追加してください。
+
+![alt text](./img/8.2.1.webp)
+
+次に Animator で右クリックをして、`Create State` -> `From New Blend Tree` を選択し、ステートを作ってください。作ったステートを選択し、インスペクターから名前を `Brend Tree` から `Move` に変更してください。そして、`Move` をダブルクリックで開きます。開くと `Vase Layer > Move >` になってるのがわかります。 `Brend Tree` を選択して、 `Blend Type` を `1D` から `2D Freeform Directional` に変更します。 `Motion` の `+` を押して　`Add Motion Field` を選択し、
+`/Assets/UnityChan/Animations` の中にある `Unitychan_RUN00_F` 、 `Unitychan_RUN00_L` 、 `Unitychan_RUN00_R` の中にある `RUN00_F` 、 `RUN00_L` 、 `RUN00_R` をドラッグアンドドロップして、それぞれ追加してください(3つ追加すうので、`+` は3回押します)。そして、それぞれの `Pos X`, `Pos Y` を `RUN00_F` は (`0`, `1`)、 `RUN00_L` は (`-1`, `0`)、 `RUN00_R` は (`1`, `0`) に変更してください。
+
+![alt text](./img/8.2.2.webp)
+
+## 8.3. アニメーションのステートマシンのパラメーターを設定する
+
+Animator の右上にある `Parameters` をクリックして、`+` を押して、`Float` を選択し、`speed` と `rotate` 入力してください。`Blend` は右クリックして消してOKです。2つのパラメーターを作成したら、 Blend Tree の Parametars にプルダウンメニュー(▼)から左側に `rotate` 、右側に `speed` を設定してください。
+
+![alt text](./img/8.3.1.webp)
+
+## 8.4. UnityChanController を unitychan につける
+
+`/Assets/UnityChanAdventure/Prefabs` の中にある `unitychan` (シーンにあるやつじゃないよ)を開いて、`UnityChanAnimatorController` を `unitychan` のインスペクターの `Animator` の `Controller` に `UnityChanAnimatorController` をドラッグアンドドロップしてください。
+
+![alt text](./img/8.4.1.webp)
+
+## 8.5. speed パラメーターでアニメーションのステートを変える
+
+Animator で BaseLayer にて、 `Idle` と `Move` を遷移できるようにします。ステートを選択して、右クリックで `Make Transition` を選択し、遷移先のステートをクリックします。 `Idle` と `Move` を両方行き来できるように双方向に矢印を付けてください。
+
+![alt text](./img/8.5.1.webp)
+
+`Idle` から `Move` に遷移する条件を設定します。`Idle` から `Move` への矢印を選択し、インスペクターの `Conditions` に `+` を押して、 `speed` を選択し、 `Greater` で `0.1` にしてください。これで、 `speed` が `0.1` 以上になったら `Idle` から `Move` に遷移します。また、 `Has Exit Time` はチェックを外してください。このチェックを外すと、アニメーションが終わらなくても遷移できるようになります。
+
+![alt text](./img/8.5.2.webp)
+
+逆に、`Move` から `Idle` に遷移する条件は `speed` が `0.1`未満になったら遷移させます。`Has Exit Time` はチェックを外すことを忘れないでください。
+
+![alt text](./img/8.5.3.png)
+
+実行して、 Unityちゃんが `WASD` で動くときにアニメーションが変わることを確認してください。
+
+![alt text](./img/8.5.1.gif)
+
