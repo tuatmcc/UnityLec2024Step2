@@ -337,6 +337,49 @@ Animator で BaseLayer にて、 `Idle` と `Move` を遷移できるように�
 
 ![alt text](./img/8.5.3.png)
 
+そして `UnityChanController` スクリプトを以下のように変更してください。
+
+```diff title="UnityChanController.cs"
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+public class UnityChanController : MonoBehaviour
+{
+    private Rigidbody rb;
+    private float speed;
+    private float rotationSpeed;
+    private Vector2 moveInput;
++   private Animator animator;
+
+    [SerializeField] private float moveSpeedConst = 5.0f;
+    [SerializeField] private float rotationSpeedConst = 5.0f;
+
+    void Start()
+    {
+        rb = GetComponent<Rigidbody>();
++       animator = GetComponent<Animator>();
+    }
+
+    void FixedUpdate()
+    {
+        speed = moveInput.y * moveSpeedConst;
+        rotationSpeed = moveInput.x * rotationSpeedConst;
+
+        rb.velocity = transform.forward * speed + new Vector3(0f, rb.velocity.y, 0f);
+        rb.angularVelocity = new Vector3(0, rotationSpeed, 0);
+    }
+
+    public void OnMove(InputAction.CallbackContext context)
+    {
+        moveInput = context.ReadValue<Vector2>();
++       animator.SetFloat("speed", moveInput.y);
++       animator.SetFloat("rotate", moveInput.x);
+    }
+}
+```
+
 実行して、 Unityちゃんが `WASD` で動くときにアニメーションが変わることを確認してください。
 
 ![alt text](./img/8.5.1.gif)
