@@ -440,7 +440,7 @@ Terrain では、地形を作るときと同じように、塗るようにして
 
 ![alt text](./img/10.2.2.webp)
 
-`Trrain` オブジェクトを選択し。 Terrainコンポーネント の `Paint Tree` を選択し、`Edit Trees` を押して、`Add Tree` を押してください。
+`Terrain` オブジェクトを選択し。 Terrainコンポーネント の `Paint Tree` を選択し、`Edit Trees` を押して、`Add Tree` を押してください。
 
 ![alt text](./img/10.2.3.webp)
 
