@@ -341,3 +341,31 @@ Animator で BaseLayer にて、 `Idle` と `Move` を遷移できるように�
 
 ![alt text](./img/8.5.1.gif)
 
+# 9. CinemaMachine でカメラを設定する
+
+ここでは、CinemaMachine を使ってカメラを設定します。
+
+CinemaMachine は、Unity のカメラを制御するためのフレームワークです。カメラの位置、回転、視野、フォーカス、ブレンドなどを簡単に設定できます。
+
+## 9.1. CinemaMachine をインストール
+
+`Window` -> `Package Manager` で `Package Manager` を開きます。`Packages` を `Unity Registry` に変更し、`Cinemachine` の `Install` ボタンを押します。
+
+![alt text](./img/9.1.1.webp)
+
+## 9.2. カメラにCinemaMachineを設定する
+
+Main シーンにある `Main Camera` を選択して、`Add Component` を押して、`Cinemachine Brain` を追加します。
+
+![alt text](./img/9.2.1.webp)
+
+## 9.3. unitychan に仮想カメラを設定する
+
+`/Assets/UnityChanAdventure/Prefabs` の中にある `unitychan` (シーンにあるやつじゃないよ)を開いて、 `unitychan` を右クリックして、 `Cinemachine` -> `FreeLook Camera` を選択してください。
+
+![alt text](./img/9.3.1.webp)
+
+`ChinemachineFreeLookCamera` の `Follow` に `unitychan` を、 `Look At` に `Character1_Hips` をドラッグアンドドロップしてください。
+
+![alt text](./img/9.3.2.webp)
+
