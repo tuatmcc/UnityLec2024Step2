@@ -701,3 +701,21 @@ public class UnityChanController : MonoBehaviour
 実行して、ドアに近づいて `E` を押すとドアが開くことを確認してください。
 
 ![alt text](./img/12.2.2.gif)
+
+はじめにドアが開けっ放しになってしまっています。これは、アニメーションのステートマシンが開始されたとき、はじめに `DoorOpen` から開始されるせいです。`DoorAnimatorController` を開いて、 `DoorClose` を右クリックして、 `Set as Layer Default State` を選択してください。すると、 `DoorClose` が開始されるようになります。
+
+![alt text](./img/12.2.16.png)
+
+## 12.4. 家の中でカメラをUnityちゃんに近づけさせる
+
+家の中に入ったら、 Unityちゃんが見えなくなってしまいます。
+
+![alt text](./img/12.3.1.png)
+
+`unitychan` プレハブを開いて、 `FreeLook Camera` の インスペクターで `CinemachineFreeLook`コンポーネントの下の方にある `Extensions` の `Add Extension` で `(select)` を押して `Cinemachine Collider` を追加してください。これで、カメラが追従するオブジェクトとの間に、他のコライダーがあると、カメラが追従するオブジェクトに近づくようになります。
+
+![alt text](./img/12.3.2.webp)
+
+実行して、家の中に入ったらカメラが Unityちゃんに近づくことを確認してください。
+
+![alt text](./img/12.3.1.gif)
