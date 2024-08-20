@@ -313,7 +313,7 @@ Animator で右クリックして、`Create State` -> `Empty` を選択し、ス
 
 ## 8.3. アニメーションのステートマシンのパラメーターを設定する
 
-Animator の右上にある `Parameters` をクリックして、`+` を押して、`Float` を選択し、`speed` と `rotate` 入力してください。`Blend` は右クリックして消してOKです。2つのパラメーターを作成したら、 Blend Tree の Parametars にプルダウンメニュー(▼)から左側に `rotate` 、右側に `speed` を設定してください。
+Animator の右上にある `Parameters` をクリックして、`+` を押して、`Float` を選択し、`speed` と `rotate` 入力してください。`Blend` は右クリックして消してOKです。2つのパラメーターを作成したら、 Blend Tree の Inspector の Parametars にプルダウンメニュー(▼)から左側に `rotate` 、右側に `speed` を設定してください。
 
 ![alt text](./img/8.3.1.webp)
 
