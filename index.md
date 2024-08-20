@@ -504,3 +504,20 @@ Terrain では、地形を作るときと同じように、塗るようにして
 
 ## 11.1. Skybox のマテリアルを作成する。
 
+`/Assets/UnityChanAdventure/Materials` の中で右クリックして、`Create` -> `Material` を選択してください。名前は `DaySkybox` にしました。
+
+![alt text](./img/11.1.1.webp)
+
+`DaySkybox` マテリアルの `Spherical` に `/Assets/UnityChanAdventure/Textures` の中にある空の画像をドラッグアンドドロップしてください。
+
+![alt text](./img/11.1.2.webp)
+
+## 11.2. Skybox を設定する
+
+上の方から `Window` -> `Rendering` -> `Lighting` を選択してください。
+
+![alt text](./img/11.2.1.webp)
+
+空がかっこよくできました！
+
+![alt text](./img/11.2.2.png)
