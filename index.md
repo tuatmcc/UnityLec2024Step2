@@ -697,3 +697,7 @@ public class UnityChanController : MonoBehaviour
 次は Main シーンを開いて、 ヒエラルキーの `GameManager` の Player Input コンポーネントで、 Events の Main の `Interact` の `+` を押して、 Main シーンにある `unitychan` をドラッグアンドドロップしてください。そして、 `nofunction` を `UnityChanController` の `OnInteract` に変更してください。
 
 ![alt text](./img/12.2.15.webp)
+
+実行して、ドアに近づいて `E` を押すとドアが開くことを確認してください。
+
+![alt text](./img/12.2.2.gif)
