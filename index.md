@@ -581,7 +581,7 @@ Unityちゃんがドアに近づいたらドアを開けられるようにしま
 
 ![alt text](./img/12.2.12.webp)
 
-`DoorAnimatorController` の `DoorOpen` と `DoorClose` の遷移を設定します。ステートを右クリックして、`Make Transition` を選択し、遷移先のステートをクリックします。 `DoorOpen` と `DoorClose` を両方行き来できるように双方向に矢印を付けてください。そして矢印を選択し、インスペクターの `Conditions` に `+` を押して、 `OpenClose` を選択して、 `Has Exit Time` はチェックを外してください。矢印を選択する際、2つの矢印を選択すれば同時に編集できます。
+`DoorAnimatorController` の `DoorOpen` と `DoorClose` の遷移を設定します。ステートを右クリックして、`Make Transition` を選択し、遷移先のステートをクリックします。 `DoorOpen` と `DoorClose` を両方行き来できるように双方向に矢印を付けてください。そして矢印を選択し、インスペクターの `Conditions` に `+` を押して、 `OpenClose` を選択して、 `Has Exit Time` はチェックを外してください。双方個同じように設定してください。
 
 ![alt text](./img/12.2.13.webp)
 
@@ -607,21 +607,93 @@ public class DoorController : MonoBehaviour, Interactable
 
     void Start()
     {
-        openPosition = transform.position + new Vector3(0, 0, 1);
-        closePosition = transform.position;
+        animator = GetComponent<Animator>();
     }
 
     public void Interact()
     {
-        if (isOpen)
-        {
-            transform.position = closePosition;
-        }
-        else
-        {
-            transform.position = openPosition;
-        }
-        isOpen = !isOpen;
+        animator.SetTrigger("OpenClose");
     }
 }
 ```
+
+`DoorController` スクリプトを `FirstFloor.001` にアタッチしてください。そして、`FirstFloor.001` に `Add Component` から `Box Collider` を追加してください。 `Center` は `(-0.5, 1, 0)` 、 `Size` は `(3, 2, 3)` にしてください。そして `Is Trigger` にチェックを入れてください。
+
+![alt text](./img/12.2.13_1.webp)
+
+`UnityChanController` スクリプトを以下のように変更してください。
+
+```diff title="UnityChanController.cs"
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+public class UnityChanController : MonoBehaviour
+{
+    private Rigidbody rb;
+    private float speed;
+    private float rotationSpeed;
+    private Vector2 moveInput;
+    private Animator animator;
++   private Interactable interactableObj;
+
+    [SerializeField] private float moveSpeedConst = 5.0f;
+    [SerializeField] private float rotationSpeedConst = 5.0f;
+
+    void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+        animator = GetComponent<Animator>();
+    }
+
+    void FixedUpdate()
+    {
+        speed = moveInput.y * moveSpeedConst;
+        rotationSpeed = moveInput.x * rotationSpeedConst;
+
+        rb.velocity = transform.forward * speed + new Vector3(0f, rb.velocity.y, 0f);
+        rb.angularVelocity = new Vector3(0, rotationSpeed, 0);
+    }
+
+    public void OnMove(InputAction.CallbackContext context)
+    {
+        moveInput = context.ReadValue<Vector2>();
+        animator.SetFloat("speed", moveInput.y);
+        animator.SetFloat("rotate", moveInput.x);
+    }
+
++   private void OnTriggerEnter(Collider other)
++   {
++      if (other.gameObject.TryGetComponent<Interactable>(out var obj))
++       {
++           interactableObj = obj;
++       }
++   }
+    
++   private void OnTriggerExit(Collider other)
++   {
++       if (other.gameObject.TryGetComponent<Interactable>(out var obj) && obj == interactableObj)
++       {
++           interactableObj = null;
++       }
++   }
+
++   public void OnInteract(InputAction.CallbackContext context)
++   {
++       if (context.performed)
++       {
++           interactableObj?.Interact();
++       }
++  }
+}
+```
+
+/Assets/UnityChanAdventure にある InputActions を開いて、`Actions` に `+` を押して `Interact` を追加してください。キーはWASDを登録したときと同じように、 `Binding` の `Path` をクリックして行います。 キーボードの `E` を割り当てました。キーを割り当てられたら閉じて保存してください。
+
+![alt text](./img/12.2.14.webp)
+
+次は Main シーンを開いて、 ヒエラルキーの `GameManager` の Player Input コンポーネントで、 Events の Main の `Interact` の `+` を押して、 Main シーンにある `unitychan` をドラッグアンドドロップしてください。そして、 `nofunction` を `UnityChanController` の `OnInteract` に変更してください。
+
+![alt text](./img/12.2.15.webp)
