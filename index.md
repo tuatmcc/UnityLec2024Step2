@@ -372,3 +372,85 @@ Main シーンにある `Main Camera` を選択して、`Add Component` を押�
 再生して確認してみましょう。カメラが Unityちゃんを追いかけるようになっているはずです。
 
 ![alt text](./img/9.3.1.gif)
+
+# 10. ステージを作る
+
+ここでは、ステージを作ります。今のところ、地面しかありません。ステージにものを置いて、飾り付けてゆきます。
+
+## 10.1. Terrain に道を作る
+
+Terrain では、地形を作るときと同じように、塗るようにして道を作る事ができます。 `Stage` プレハブを開き、Terrain コンポーネントで、 `Paint Terrain` を選択し、 `Paint Texture` に切り替え、`Edit Terrain Layers` を押して、`Create Layer` を押して、道のテクスチャを選択してください。名前は `Michi` とかにしときましょう。
+
+![alt text](./img/10.1.1.webp)
+
+![alt text](./img/10.1.2.webp)
+
+サイズは小さめで、強さは 100 にするといい感じに道が描けます。
+
+![alt text](./img/10.1.3.png)
+
+## 10.2. 木を生やす
+
+木を生やすために、木のプレハブを作ります。 `/Assets/UnityChanAdventure/Models/Tree` の中にある `Tree` を選択し、右クリックして、`Create -> Prefab Variant` を選択してください。`Tree` プレハブができたら、`UnityChanAdventure` の `Prefabs` フォルダにドラッグアンドドロップしてください。
+
+![alt text](./img/10.2.1.png)
+
+![alt text](./img/10.2.2.webp)
+
+`Trrain` オブジェクトを選択し。 Terrainコンポーネント の `Paint Tree` を選択し、`Edit Trees` を押して、`Add Tree` を押してください。
+
+![alt text](./img/10.2.3.webp)
+
+`Tree Prefab` には、`/Assets/UnityChanAdventure/Prefabs` の中にある `Tree` をドラッグアンドドロップしてください。そして下の方にある `Add` を押してください。
+
+![alt text](./img/10.2.4.webp)
+
+`Tree Density` (強さ) を強くしすぎると密集過ぎちゃうので気をつけてください。
+
+![alt text](./img/10.2.5.png)
+
+![alt text](./img/10.2.6.png)
+
+複数種類の木を生やすこともできます。 `Tree` プレハブを 2 つコピーして増やして、それぞれ `treered` と `treeyellow` にしました。
+
+![alt text](./img/10.2.7.png)
+
+`treered` プレハブの `Mesh Renderer` の `Materials` の `Leef` を `/Assets/UnityChanAdventure/Models/Tree` の中にある `RedLeef` に変更してください。`treeyellow` プレハブも同様に `Leef` を `/Assets/UnityChanAdventure/Models/Tree` に変更してください。
+
+![alt text](./img/10.2.8.webp)
+
+![alt text](./img/10.2.9.png)
+
+いい感じに塗って木を生やしましょう
+
+![alt text](./img/10.2.10.png)
+
+## 10.3. 岩を置く
+
+岩のモデルは `/Assets/UnityChanAdventure/Models/Rock` にあります。岩は 4 つあります。すべての `Rock` プレハブを作り、`UnityChanAdventure` の `Prefabs` フォルダにドラッグアンドドロップしてください。
+
+![alt text](./img/10.3.1.webp)
+
+![alt text](./img/10.3.2.webp)
+
+`/Assets/UnityChanAdventure` に `Materials` フォルダーを作って、 フォルダ内で右クリックし、`Create` -> `Material` でマテリアルを作ってください。名前は `Rock` にしました。
+
+![alt text](./img/10.3.3.webp)
+
+`Rock` マテリアルを選択して、 `Base Map` に `/Assets/UnityChanAdventure/Textures/Rock` の中にある石の画像をドラッグアンドドロップしてください。
+
+![alt text](./img/10.3.4.webp)
+
+`/Assets/UnityChanAdventure/Prefabs` の中にある岩をすべて選択し、`Mesh Renderer` の `Materials` の `Element 0` に `Rock` マテリアルをドラッグアンドドロップしてください。また、 `Add Component` で、 `Mesh Collider` コンポーネントを付けてください。 `Rock` プレハブを選択する際、Shift キーを押すと複数選択でき、複数選択した状態で編集すると、すべて同時に編集できます。
+
+![alt text](./img/10.3.5.webp)
+
+`/Assets/UnityChanAdventure/Prefabs` の中にある岩を適当に `Stage` に置いてください。繰り返し置けば、複製されます。複製して置いたあと、位置や角度を変えたり、組み合わせたりするだけで、同じモデルを使っても違う岩に見えたりします。位置や角度を変える際に、 `Scene` タブの左の方の矢印をクリックすると、移動、回転ができます。個数や位置、角度はお好みでどうぞ。
+
+![alt text](./img/10.3.6.webp)
+
+フィールド上に数千個置けばいい感じのフィールドが出来上がるのですが、流石に大変すぎるので、 Unity講習会中は数個でOKです。
+
+実行してフィールドを走ってみましょう！
+
+![alt text](./img/10.3.1.gif)
