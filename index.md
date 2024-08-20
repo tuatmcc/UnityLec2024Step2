@@ -19,21 +19,18 @@ Unityちゃんアドベンチャーゲーム
 * EditorLayout
 * Animation
 * Physics
-* AudioMixer
 * PrefabVariant
 * ParticleSystem
 * UnityPackage
 * Decal Projector
 * InputSystem
 * TextMeshPro
-* Timeline
+<!--  * Timeline -->
 * Cinemachine
 * Terrain
 * Skybox
-* DepthCamera
 * PostProcessing
 * Lightings
-* UIToolkit
 
 ## 1.3. ゲーム仕様
 
@@ -521,3 +518,110 @@ Terrain では、地形を作るときと同じように、塗るようにして
 空がかっこよくできました！
 
 ![alt text](./img/11.2.2.png)
+
+# 12. 家を置く
+
+今回のアセットに家のモデルも用意しています！
+
+## 12.1. 家のプレハブを作る
+
+`/Assets/UnityChanAdventure/Models/House` の中にある `House` を選択し、右クリックして、`Create -> Prefab Variant` を選択してください。`House` プレハブができたら、`UnityChanAdventure` の `Prefabs` フォルダにドラッグアンドドロップしてください。そして `House` プレハブを開いて、`House` の中にある以下の画像のオブジェクトをすべて選択し、 AddComponent で `Mesh Collider` を追加してください。
+
+![alt text](./img/12.1.1.webp)
+
+## 12.2. 家を置く
+
+`House` プレハブを適当に `Stage` プレハブに置いてください。
+
+![alt text](./img/12.2.1.png)
+
+家を平らな場所に置いたら、以下の画像のようにカメラを動かしたら色がパタパタしてる感じになると思います。これは同じ場所に同じオブジェクトがあるときに起こる [Z-fighting](https://en.wikipedia.org/wiki/Z-fighting) という現象です。対処法はどちらかのオブジェクトをほんのちょっとだけずらすことです。ヒエラルキーの `House` を選択して、`Transform` の `Position` の `Z` を今の座標から `0.0001` ほど上げてみましょう(以下の画像では最初は `0` で対処したら `0.0001` に変更しています)。
+
+![alt text](./img/12.2.2.png)
+
+![alt text](./img/12.2.3.png)
+
+## 12.3. ドアを開ける
+
+Unityちゃんがドアに近づいたらドアを開けられるようにしましょう！ドアはアニメーションを作って開け閉めします。 /Assets/UnityChanAdventure/Animations フォルダで右クリックし、 `Create` -> `Animator Controller` を選択してください。名前は `DoorAnimatorController` にしました。
+
+![alt text](./img/12.2.4.png)
+
+また、同じフォルダ内で右クリックし、 `Create` -> `Animation` を選択してください。名前は `DoorOpen` にしました。
+
+![alt text](./img/12.2.5.png)
+
+/Assets/UnityChanAdventure/Prefabs の中にある `House` を開いて、`House` の中にある `FirstFloor.001` を選択してください。これが家のドアの部分です。`FirstFloor.001` を選択して、`Add Component` で `Animator` を追加してください。そして `DoorAnimatorController` を `Animator` コンポーネントの `Controller` にドラッグアンドドロップしてください。
+
+![alt text](./img/12.2.6.webp)
+
+`DoorAnimatorController` を開いて、`DoorOpen` をドラッグアンドドロップしてください。そして、`DoorOpen` をダブルクリックしてください。すると、アニメーションの編集ウィンドウが出てきます。編集ウィンドウが出てきたら、ヒエラルキー(Houseオブジェクトがあるはず)の `FirstFloor.001` を選択してください。そして、アニメーションの編集ウィンドウで、 `Add Property` を押して、 `Transform` の `Rotation` の `+` を選択してください。 (`Transform` と書かれている左側の `▶` を押すと `Rotation` が出てきます)。
+
+![alt text](./img/12.2.7.webp)
+
+アニメーションを作りましょう。アニメーションの編集ウィンドウで、 `1:00` (1秒地点) にあるキー(白くてひし形のやつ)を `0:50` (0.5秒地点) までドラッグしてください。一番上の白いやつ(すべてを選択できる)か、上から2番目(Transformのやつを選択できる)をドラッグすればできます、そして、白い縦のバーを `0:50` まで、ドラッグしてください。上の時間メモリがついてるところをつかめばドラッグできます。白い縦のバーを `0:50` にしたら `Rotation.y` を `90` にしてください。そして、再生して確認してみてください。
+
+![alt text](./img/12.2.8.webp)
+
+![alt text](./img/12.2.1.gif)
+
+ドアを閉めるアニメーションも同様に作って行きます。 `Door Close` アニメーションを作成し、`DoorAnimatorController` に追加してください。
+
+![alt text](./img/12.2.9.webp)
+
+アニメーションの編集ウィンドウで、 `DoorClose` の方を編集するには、 `FirstFloor.001` を選択して、 アニメーションの編集ウィンドウの左上の `DoorOpen` になってるところをクリックして、 `DoorClose` を選択することでできます。
+
+![alt text](./img/12.2.10.webp)
+
+`DoorClose` のアニメーションは、 `0:00` で `Rotation.y` を `90` 、`0:50` で `Rotation.y` を `0` にしてください。そして、再生して確認してみてください。
+
+![alt text](./img/12.2.11.webp)
+
+`DoorAnimatorController` を開いて、 `Parameters` に `+` ボタンを押して、 `Trigger` を選択し、名前を `OpenClose` にしてパラメーターを選択してください。
+
+![alt text](./img/12.2.12.webp)
+
+`DoorAnimatorController` の `DoorOpen` と `DoorClose` の遷移を設定します。ステートを右クリックして、`Make Transition` を選択し、遷移先のステートをクリックします。 `DoorOpen` と `DoorClose` を両方行き来できるように双方向に矢印を付けてください。そして矢印を選択し、インスペクターの `Conditions` に `+` を押して、 `OpenClose` を選択して、 `Has Exit Time` はチェックを外してください。矢印を選択する際、2つの矢印を選択すれば同時に編集できます。
+
+![alt text](./img/12.2.13.webp)
+
+/Assets/UnityChanAdventure/Scripts フォルダに `Interactable.cs` を作成して以下のスクリプトを書いてください。
+
+```csharp title="Interactable.cs"
+public interface Interactable
+{
+    void Interact();
+}
+```
+
+そして、/Assets/UnityChanAdventure/Scripts フォルダに `DoorController.cs` を作成して以下のスクリプトを書いてください。
+
+```csharp title="DoorController.cs"
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class DoorController : MonoBehaviour, Interactable
+{
+    private Animator animator;
+
+    void Start()
+    {
+        openPosition = transform.position + new Vector3(0, 0, 1);
+        closePosition = transform.position;
+    }
+
+    public void Interact()
+    {
+        if (isOpen)
+        {
+            transform.position = closePosition;
+        }
+        else
+        {
+            transform.position = openPosition;
+        }
+        isOpen = !isOpen;
+    }
+}
+```
