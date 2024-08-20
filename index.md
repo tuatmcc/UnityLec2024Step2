@@ -369,3 +369,6 @@ Main シーンにある `Main Camera` を選択して、`Add Component` を押�
 
 ![alt text](./img/9.3.2.webp)
 
+再生して確認してみましょう。カメラが Unityちゃんを追いかけるようになっているはずです。
+
+![alt text](./img/9.3.1.gif)
