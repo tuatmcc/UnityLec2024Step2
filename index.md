@@ -197,7 +197,7 @@ Mainシーンを開いてUnityちゃんのプレハブを置きましょう。`<
 
 ![alt text](./img/7.1.1.webp)
 
-`Edid` -> `Project Settings` で、 `Input System Package` を選択し、`Create settings asset` チェックボックスをオンにします。
+`Edit` -> `Project Settings` で、 `Input System Package` を選択し、`Create settings asset` ボタンを押す。
 
 ![alt text](./img/7.1.2.webp)
 
