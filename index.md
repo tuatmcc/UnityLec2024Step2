@@ -306,7 +306,7 @@ Animator で右クリックして、`Create State` -> `Empty` を選択し、ス
 
 ![alt text](./img/8.2.1.webp)
 
-次に Animator で右クリックをして、`Create State` -> `From New Blend Tree` を選択し、ステートを作ってください。作ったステートを選択し、インスペクターから名前を `Brend Tree` から `Move` に変更してください。そして、`Move` をダブルクリックで開きます。開くと `Vase Layer > Move >` になってるのがわかります。 `Brend Tree` を選択して、 `Blend Type` を `1D` から `2D Freeform Directional` に変更します。 `Motion` の `+` を押して　`Add Motion Field` を選択し、
+次に Animator で右クリックをして、`Create State` -> `From New Blend Tree` を選択し、ステートを作ってください。作ったステートを選択し、インスペクターから名前を `Brend Tree` から `Move` に変更してください。そして、`Move` をダブルクリックで開きます。開くと `Base Layer > Move >` になってるのがわかります(先どの全体のものではBase Layerでした)。 `Blend Tree` を選択して、 `Blend Type` を `1D` から `2D Freeform Directional` に変更します。 `Motion` の `+` を押して　`Add Motion Field` を選択し、
 `/Assets/UnityChan/Animations` の中にある `Unitychan_RUN00_F` 、 `Unitychan_RUN00_L` 、 `Unitychan_RUN00_R` の中にある `RUN00_F` 、 `RUN00_L` 、 `RUN00_R` をドラッグアンドドロップして、それぞれ追加してください(3つ追加すうので、`+` は3回押します)。そして、それぞれの `Pos X`, `Pos Y` を `RUN00_F` は (`0`, `1`)、 `RUN00_L` は (`-1`, `0`)、 `RUN00_R` は (`1`, `0`) に変更してください。
 
 ![alt text](./img/8.2.2.webp)
