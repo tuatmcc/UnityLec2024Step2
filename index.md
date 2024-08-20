@@ -296,7 +296,7 @@ Main シーンに `GameManager` プレハブを置いてください。`GameMana
 
 ## 8.1. AnimationController を作る
 
-`/Assets/UnityChanAdventure` に `Animationa` フォルダを作り、その中で右クリック -> `Create` -> `Animator Controller` を選択し、`UnityChanAnimatorController` と入力してください。ダブルクリックして開いてください。Unity のアニメーションのステートマシンを編集できます。
+`/Assets/UnityChanAdventure` に `Animations` フォルダを作り、その中で右クリック -> `Create` -> `Animator Controller` を選択し、`UnityChanAnimatorController` と入力してください。ダブルクリックして開いてください。Unity のアニメーションのステートマシンを編集できます。
 
 ![alt text](./img/8.1.1.png)
 
