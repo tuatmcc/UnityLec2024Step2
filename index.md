@@ -278,7 +278,7 @@ Unityちゃん のプレハブを開いてください。 `UnityChanController` 
 
 ![alt text](./img/7.4.1.webp)
 
-Main シーンに `GameManager` プレハブを置いてください。`GameManager` を選択して、`GameManager` のインスペクターの `Player Input` で、 `Behaavior` を `Invoke Unity Events` にして、 `Events` -> `Main` -> `Move` で `+` を押して、 Main シーンにある `unitychan` をドラッグアンドドロップします。そして、 `nofunction` を `UnityChanController` の `OnMove` に変更します。
+Main シーンに `GameManager` プレハブを置いてください。`GameManager` を選択して、`GameManager` のインスペクターの `Player Input` で、 `Behavior` を `Invoke Unity Events` にして、 `Events` -> `Main` -> `Move` で `+` を押して、 Main シーンにある `unitychan` をドラッグアンドドロップします。そして、 `nofunction` を `UnityChanController` の `OnMove` に変更します。
 
 ![alt text](./img/7.4.2.webp)
 
