@@ -106,9 +106,9 @@ UnityPackage とは、Unity Editor で使えるアセットのパッケージフ
 
 ## 4.3. UnityChanAdventurのアセットのUnityPackageをインポート
 
-UnityChanAdventurのアセットをダウンロード
+UnityChanAdventurのアセットをダウンロードします。以下のリンクより、Google Drive にアクセスしてください。
 
-TODO: あとでリンクを書く
+[UnityChanAdventurのアセット](https://drive.google.com/file/d/1rgrjjgJ8XjRMFYfynyDe7-jFOEwK-MzN/view?usp=sharing)
 
 UnityChan をインポートしたとき同様。ダウンロードしたファイルを Unity Editor の `Project` タブの `Assets` にドラッグアンドドロップし、`import Unity Package` 画面が表示されたら、 `Import` ボタンを押す。
 
