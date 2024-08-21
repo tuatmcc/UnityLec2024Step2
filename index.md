@@ -20,17 +20,13 @@ Unityちゃんアドベンチャーゲーム
 * Animation
 * Physics
 * PrefabVariant
-* ParticleSystem
 * UnityPackage
-* Decal Projector
 * InputSystem
 * TextMeshPro
-<!--  * Timeline -->
 * Cinemachine
 * Terrain
 * Skybox
 * PostProcessing
-* Lightings
 
 ## 1.3. ゲーム仕様
 
@@ -782,3 +778,51 @@ Q キーを押すと、切り替わるようにします。 /Assets/UnityChanAdv
 実行して、 `Q` キーを押すと、昼と夜が切り替わることを確認してください。
 
 ![alt text](./img/13.1.1.gif)
+
+# 14. Volume を使って Post Processing を設定する
+
+ここでは、Volume を使って Post Processing を設定します。Post Processing は、カメラに対して、エフェクトをかけることができます。今回は、Bloom、Motion Blur、Depth Of Fieldをつけます。
+
+## 14.1. Volume を作成する
+
+`/Assets/UnityChanAdventure/Prefabs` の中に `Create` -> `Prefab` を選択してください。名前は `Volume` にしました。
+
+![alt text](./img/14.1.1.webp)
+
+`Volume` プレハブを開いて、`Add Component` で `Volume` を追加してください。そして、`Add Component` で `Volume` を追加してください。そして `Volume` の `Profile` に `New` を押してください。 `New` を押すと、 `Volume Profile` が /Assets に作成されます。
+
+![alt text](./img/14.1.2.webp)
+
+## 14.2. Bloom
+
+Bloom は、明るい部分をぼかして、光の輝きを表現するエフェクトです。 `Volume` プレハブを開いて、 `Volume` コンポーネントの `Add Override` で `Post-processing` -> `Blooom` を追加してください。そして、 `Intensity` にチェックを付け、 `1` にしてください。`Intensity` は強さです。
+
+![alt text](./img/14.1.3.webp)
+
+`Main` シーンを開いて、`Main Camera` を選択して、`Camera` コンポーネントの `Rendering` の `Post Processing` のチェックを入れてください(`Rendering` の `▶` を押すと出てきます)。そして、 `Volume` プレハブを `Main` シーンにドラッグアンドドロップしてください。
+
+![alt text](./img/14.1.4.webp)
+
+実行して、Bloom がかかっていることを確認してください。夜にすると、Bloom がわかりやすくなります。以下の画像は右が Bloom なし、左が Bloom ありです。
+
+![alt text](./img/14.1.5.webp)
+
+## 14.3. Motion Blur
+
+Motion Blur は、動いているオブジェクトをぼかして、動きを表現するエフェクトです。 `Volume` プレハブを開いて、 `Volume` コンポーネントの `Add Override` で `Post-processing` -> `Motion Blur` を追加してください。そして、 `Intensity` にチェックを付け、 `0.5` にしてください。 `Intensity` は強さです。また、 `Quality` は `Medium` にしてください(モーションブラーは重いので、パソコンのスペックによって、 `Low` や `High` にしましょう)。
+
+![alt text](./img/14.3.1.webp)
+
+実行して、Motion Blur がかかっていることを確認してください。少し残像が出るようになります。
+
+![alt text](./img/14.3.1.gif)
+
+## 14.4. Depth Of Field
+
+Depth Of Field は、焦点を合わせることで、前後のオブジェクトをぼかすエフェクトです。 `Volume` プレハブを開いて、 `Volume` コンポーネントの `Add Override` で `Post-processing` -> `Depth Of Field` を追加してください。そして、 `Mode` にチェックを入れて、 `Gaussian` にしてください。 `Start` と `End` にチェックを入れてください。 それぞれの数値は、焦点の範囲です。デフォルトのままでもOKですが、お好みで変更してください。
+
+![alt text](./img/14.4.1.webp)
+
+実行して、Depth Of Field がかかっていることを確認してください。近くにあるものはちゃんと写って、遠くにあるものはぼやけていることがわかります。
+
+![alt text](./img/14.4.2.png)
