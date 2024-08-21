@@ -9,6 +9,7 @@ author: "sugawa197203"
 * この記事は Unity 講習会 2024 応用編の資料です
 * Unity Hub と Unity 2022.3.38f1 をインストール済み(※ 2022.3.38f1 はあくまで例)
 * 任意の IDE がある(Visual studio, Rider など)
+* Unity ちょっと触ったことがある人
 
 ## 1.1. 題材
 
@@ -35,6 +36,8 @@ Unityちゃんアドベンチャーゲーム
 ## 1.3. ゲーム仕様
 
 Unityちゃんが障害物を避けながらアイテムを回収してくるゲーム
+
+応用編、発展編に2回にわたって作ります。
 
 HP が 0 になるとゲームオーバー
 
@@ -380,6 +383,8 @@ public class UnityChanController : MonoBehaviour
 実行して、 Unityちゃんが `WASD` で動くときにアニメーションが変わることを確認してください。
 
 ![alt text](./img/8.5.1.gif)
+
+Unity のアニメーションはステートマシンで切り替えます。現在再生したいアニメーションを1つのステートに設定します。あるステートを再生中に、Animator Controller で定義したパラメーターで、遷移条件に合う矢印(transition)があれば、そのステートに遷移します。パラメーターの種類は Integer、 Float、 Bool、 Trigger の4種類があり、それぞれ整数、実数、真偽値、トリガーです。トリガーは True にすると遷移後、自動で False になります。
 
 # 9. CinemaMachine でカメラを設定する
 
