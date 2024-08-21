@@ -9,6 +9,7 @@ author: "sugawa197203"
 * この記事は Unity 講習会 2024 応用編の資料です
 * Unity Hub と Unity 2022.3.38f1 をインストール済み(※ 2022.3.38f1 はあくまで例)
 * 任意の IDE がある(Visual studio, Rider など)
+* Unity ちょっと触ったことがある人
 
 ## 1.1. 題材
 
@@ -31,6 +32,8 @@ Unityちゃんアドベンチャーゲーム
 ## 1.3. ゲーム仕様
 
 Unityちゃんが障害物を避けながらアイテムを回収してくるゲーム
+
+応用編、発展編に2回にわたって作ります。
 
 HP が 0 になるとゲームオーバー
 
@@ -377,6 +380,10 @@ public class UnityChanController : MonoBehaviour
 
 ![alt text](./img/8.5.1.gif)
 
+Unity のアニメーションはステートマシンで切り替えます。現在再生したいアニメーションを1つのステートに設定します。あるステートを再生中に、Animator Controller で定義したパラメーターで、遷移条件に合う矢印(transition)があれば、そのステートに遷移します。パラメーターの種類は Integer、 Float、 Bool、 Trigger の4種類があり、それぞれ整数、実数、真偽値、トリガーです。トリガーは True にすると遷移後、自動で False になります。
+
+アニメーションのパラメーターは、  `SetFloat` でパラメーターの名前を String で指定して変更できます。 `Animator.StringToHash` を使うと、アニメーションのパラメーターの変更が少し軽くなったりします。
+
 # 9. CinemaMachine でカメラを設定する
 
 ここでは、CinemaMachine を使ってカメラを設定します。
@@ -408,6 +415,10 @@ Main シーンにある `Main Camera` を選択して、`Add Component` を押�
 再生して確認してみましょう。カメラが Unityちゃんを追いかけるようになっているはずです。
 
 ![alt text](./img/9.3.1.gif)
+
+ノーコードでここまでできました。 Cinemachine で設定できるカメラの動きはたくさんあります。ググったらいろいろ出てきます。
+[Cinemachineで設定できる挙動をまとめてみました](https://qiita.com/jusmiso/items/34fa5a97cc440674b801)
+[【Unity】Cinemachineの全機能を解説！ありとあらゆるカメラワークを高クオリティに作る方法総まとめ](https://light11.hatenadiary.com/entry/2019/10/24/220542)
 
 # 10. ステージを作る
 
