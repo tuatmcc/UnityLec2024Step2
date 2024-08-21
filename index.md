@@ -418,6 +418,10 @@ Main シーンにある `Main Camera` を選択して、`Add Component` を押�
 
 ![alt text](./img/9.3.1.gif)
 
+ノーコードでここまでできました。 Cinemachine で設定できるカメラの動きはたくさんあります。ググったらいろいろ出てきます。
+[Cinemachineで設定できる挙動をまとめてみました](https://qiita.com/jusmiso/items/34fa5a97cc440674b801)
+[【Unity】Cinemachineの全機能を解説！ありとあらゆるカメラワークを高クオリティに作る方法総まとめ](https://light11.hatenadiary.com/entry/2019/10/24/220542)
+
 # 10. ステージを作る
 
 ここでは、ステージを作ります。今のところ、地面しかありません。ステージにものを置いて、飾り付けてゆきます。
