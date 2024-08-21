@@ -552,3 +552,4 @@ FodyWeavers.xsd
 
 
  !/UnityChanAdventure.unitypackage
+ /UnityChanAdventure/Assets/UnityChanAdventure/Font/*
