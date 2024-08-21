@@ -9,6 +9,7 @@ author: "sugawa197203"
 * この記事は Unity 講習会 2024 応用編の資料です
 * Unity Hub と Unity 2022.3.38f1 をインストール済み(※ 2022.3.38f1 はあくまで例)
 * 任意の IDE がある(Visual studio, Rider など)
+* Unity ちょっと触ったことがある人
 
 ## 1.1. 題材
 
@@ -19,25 +20,20 @@ Unityちゃんアドベンチャーゲーム
 * EditorLayout
 * Animation
 * Physics
-* AudioMixer
 * PrefabVariant
-* ParticleSystem
 * UnityPackage
-* Decal Projector
 * InputSystem
 * TextMeshPro
-* Timeline
 * Cinemachine
 * Terrain
 * Skybox
-* DepthCamera
 * PostProcessing
-* Lightings
-* UIToolkit
 
 ## 1.3. ゲーム仕様
 
 Unityちゃんが障害物を避けながらアイテムを回収してくるゲーム
+
+応用編、発展編に2回にわたって作ります。
 
 HP が 0 になるとゲームオーバー
 
@@ -110,9 +106,9 @@ UnityPackage とは、Unity Editor で使えるアセットのパッケージフ
 
 ## 4.3. UnityChanAdventurのアセットのUnityPackageをインポート
 
-UnityChanAdventurのアセットをダウンロード
+UnityChanAdventurのアセットをダウンロードします。以下のリンクより、Google Drive にアクセスしてください。
 
-TODO: あとでリンクを書く
+[UnityChanAdventurのアセット](https://drive.google.com/file/d/1rgrjjgJ8XjRMFYfynyDe7-jFOEwK-MzN/view?usp=sharing)
 
 UnityChan をインポートしたとき同様。ダウンロードしたファイルを Unity Editor の `Project` タブの `Assets` にドラッグアンドドロップし、`import Unity Package` 画面が表示されたら、 `Import` ボタンを押す。
 
@@ -143,7 +139,7 @@ Terrain に草を生やします。
 
 ![alt text](./img/5.2.1.webp)
 
-草が生えました！草のテクスチャは `/Assets/UnityChanAdventure/Textures/TerrainGrass` の中にあります。Terrain のレイヤーデータはこのフォルダに作られます。このファイルの名前を変えると、レイヤーの名前も変わります。以下の画像ではレイヤー名を `Kusa` に変更しています。
+草が生えました！草のテクスチャは `/Assets/UnityChanAdventure/Textures/TerrainGrass` の中にあります。Terrain のレイヤーデータは開いてるフォルダに作られます。このファイルの名前を変えると、レイヤーの名前も変わります。以下の画像ではレイヤー名を `Kusa` に変更しています。
 
 ![alt text](./img/5.2.2.webp)
 
@@ -282,7 +278,7 @@ Unityちゃん のプレハブを開いてください。 `UnityChanController` 
 
 ![alt text](./img/7.4.1.webp)
 
-Main シーンに `GameManager` プレハブを置いてください。`GameManager` を選択して、`GameManager` のインスペクターの `Player Input` で、 `Behaavior` を `Invoke Unity Events` にして、 `Events` -> `Main` -> `Move` で `+` を押して、 Main シーンにある `unitychan` をドラッグアンドドロップします。そして、 `nofunction` を `UnityChanController` の `OnMove` に変更します。
+Main シーンに `GameManager` プレハブを置いてください。`GameManager` を選択して、`GameManager` のインスペクターの `Player Input` で、 `Behavior` を `Invoke Unity Events` にして、 `Events` -> `Main` -> `Move` で `+` を押して、 Main シーンにある `unitychan` をドラッグアンドドロップします。そして、 `nofunction` を `UnityChanController` の `OnMove` に変更します。
 
 ![alt text](./img/7.4.2.webp)
 
@@ -384,6 +380,10 @@ public class UnityChanController : MonoBehaviour
 
 ![alt text](./img/8.5.1.gif)
 
+Unity のアニメーションはステートマシンで切り替えます。現在再生したいアニメーションを1つのステートに設定します。あるステートを再生中に、Animator Controller で定義したパラメーターで、遷移条件に合う矢印(transition)があれば、そのステートに遷移します。パラメーターの種類は Integer、 Float、 Bool、 Trigger の4種類があり、それぞれ整数、実数、真偽値、トリガーです。トリガーは True にすると遷移後、自動で False になります。
+
+アニメーションのパラメーターは、  `SetFloat` でパラメーターの名前を String で指定して変更できます。 `Animator.StringToHash` を使うと、アニメーションのパラメーターの変更が少し軽くなったりします。
+
 # 9. CinemaMachine でカメラを設定する
 
 ここでは、CinemaMachine を使ってカメラを設定します。
@@ -415,6 +415,10 @@ Main シーンにある `Main Camera` を選択して、`Add Component` を押�
 再生して確認してみましょう。カメラが Unityちゃんを追いかけるようになっているはずです。
 
 ![alt text](./img/9.3.1.gif)
+
+ノーコードでここまでできました。 Cinemachine で設定できるカメラの動きはたくさんあります。ググったらいろいろ出てきます。
+[Cinemachineで設定できる挙動をまとめてみました](https://qiita.com/jusmiso/items/34fa5a97cc440674b801)
+[【Unity】Cinemachineの全機能を解説！ありとあらゆるカメラワークを高クオリティに作る方法総まとめ](https://light11.hatenadiary.com/entry/2019/10/24/220542)
 
 # 10. ステージを作る
 
@@ -521,3 +525,319 @@ Terrain では、地形を作るときと同じように、塗るようにして
 空がかっこよくできました！
 
 ![alt text](./img/11.2.2.png)
+
+# 12. 家を置く
+
+今回のアセットに家のモデルも用意しています！
+
+## 12.1. 家のプレハブを作る
+
+`/Assets/UnityChanAdventure/Models/House` の中にある `House` を選択し、右クリックして、`Create -> Prefab Variant` を選択してください。`House` プレハブができたら、`UnityChanAdventure` の `Prefabs` フォルダにドラッグアンドドロップしてください。そして `House` プレハブを開いて、`House` の中にある以下の画像のオブジェクトをすべて選択し、 AddComponent で `Mesh Collider` を追加してください。
+
+![alt text](./img/12.1.1.webp)
+
+## 12.2. 家を置く
+
+`House` プレハブを適当に `Stage` プレハブに置いてください。
+
+![alt text](./img/12.2.1.png)
+
+家を平らな場所に置いたら、以下の画像のようにカメラを動かしたら色がパタパタしてる感じになると思います。これは同じ場所に同じオブジェクトがあるときに起こる [Z-fighting](https://en.wikipedia.org/wiki/Z-fighting) という現象です。対処法はどちらかのオブジェクトをほんのちょっとだけずらすことです。ヒエラルキーの `House` を選択して、`Transform` の `Position` の `Z` を今の座標から `0.0001` ほど上げてみましょう(以下の画像では最初は `0` で対処したら `0.0001` に変更しています)。
+
+![alt text](./img/12.2.2.png)
+
+![alt text](./img/12.2.3.png)
+
+## 12.3. ドアを開ける
+
+Unityちゃんがドアに近づいたらドアを開けられるようにしましょう！ドアはアニメーションを作って開け閉めします。 /Assets/UnityChanAdventure/Animations フォルダで右クリックし、 `Create` -> `Animator Controller` を選択してください。名前は `DoorAnimatorController` にしました。
+
+![alt text](./img/12.2.4.png)
+
+また、同じフォルダ内で右クリックし、 `Create` -> `Animation` を選択してください。名前は `DoorOpen` にしました。
+
+![alt text](./img/12.2.5.png)
+
+/Assets/UnityChanAdventure/Prefabs の中にある `House` を開いて、`House` の中にある `FirstFloor.001` を選択してください。これが家のドアの部分です。`FirstFloor.001` を選択して、`Add Component` で `Animator` を追加してください。そして `DoorAnimatorController` を `Animator` コンポーネントの `Controller` にドラッグアンドドロップしてください。
+
+![alt text](./img/12.2.6.webp)
+
+`DoorAnimatorController` を開いて、`DoorOpen` をドラッグアンドドロップしてください。そして、`DoorOpen` をダブルクリックしてください。すると、アニメーションの編集ウィンドウが出てきます。編集ウィンドウが出てきたら、ヒエラルキー(Houseオブジェクトがあるはず)の `FirstFloor.001` を選択してください。そして、アニメーションの編集ウィンドウで、 `Add Property` を押して、 `Transform` の `Rotation` の `+` を選択してください。 (`Transform` と書かれている左側の `▶` を押すと `Rotation` が出てきます)。
+
+![alt text](./img/12.2.7.webp)
+
+アニメーションを作りましょう。アニメーションの編集ウィンドウで、 `1:00` (1秒地点) にあるキー(白くてひし形のやつ)を `0:50` (0.5秒地点) までドラッグしてください。一番上の白いやつ(すべてを選択できる)か、上から2番目(Transformのやつを選択できる)をドラッグすればできます、そして、白い縦のバーを `0:50` まで、ドラッグしてください。上の時間メモリがついてるところをつかめばドラッグできます。白い縦のバーを `0:50` にしたら `Rotation.y` を `90` にしてください。そして、再生して確認してみてください。
+
+![alt text](./img/12.2.8.webp)
+
+![alt text](./img/12.2.1.gif)
+
+ドアを閉めるアニメーションも同様に作って行きます。 `Door Close` アニメーションを作成し、`DoorAnimatorController` に追加してください。
+
+![alt text](./img/12.2.9.webp)
+
+アニメーションの編集ウィンドウで、 `DoorClose` の方を編集するには、 `FirstFloor.001` を選択して、 アニメーションの編集ウィンドウの左上の `DoorOpen` になってるところをクリックして、 `DoorClose` を選択することでできます。
+
+![alt text](./img/12.2.10.webp)
+
+`DoorClose` のアニメーションは、 `0:00` で `Rotation.y` を `90` 、`0:50` で `Rotation.y` を `0` にしてください。そして、再生して確認してみてください。
+
+![alt text](./img/12.2.11.webp)
+
+`DoorAnimatorController` を開いて、 `Parameters` に `+` ボタンを押して、 `Trigger` を選択し、名前を `OpenClose` にしてパラメーターを選択してください。
+
+![alt text](./img/12.2.12.webp)
+
+`DoorAnimatorController` の `DoorOpen` と `DoorClose` の遷移を設定します。ステートを右クリックして、`Make Transition` を選択し、遷移先のステートをクリックします。 `DoorOpen` と `DoorClose` を両方行き来できるように双方向に矢印を付けてください。そして矢印を選択し、インスペクターの `Conditions` に `+` を押して、 `OpenClose` を選択して、 `Has Exit Time` はチェックを外してください。双方個同じように設定してください。
+
+![alt text](./img/12.2.13.webp)
+
+/Assets/UnityChanAdventure/Scripts フォルダに `Interactable.cs` を作成して以下のスクリプトを書いてください。
+
+```csharp title="Interactable.cs"
+public interface Interactable
+{
+    void Interact();
+}
+```
+
+そして、/Assets/UnityChanAdventure/Scripts フォルダに `DoorController.cs` を作成して以下のスクリプトを書いてください。
+
+```csharp title="DoorController.cs"
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class DoorController : MonoBehaviour, Interactable
+{
+    private Animator animator;
+
+    void Start()
+    {
+        animator = GetComponent<Animator>();
+    }
+
+    public void Interact()
+    {
+        animator.SetTrigger("OpenClose");
+    }
+}
+```
+
+`DoorController` スクリプトを `FirstFloor.001` にアタッチしてください。そして、`FirstFloor.001` に `Add Component` から `Box Collider` を追加してください。 `Center` は `(-0.5, 1, 0)` 、 `Size` は `(3, 2, 3)` にしてください。そして `Is Trigger` にチェックを入れてください。
+
+![alt text](./img/12.2.13_1.webp)
+
+`UnityChanController` スクリプトを以下のように変更してください。
+
+```diff title="UnityChanController.cs"
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+public class UnityChanController : MonoBehaviour
+{
+    private Rigidbody rb;
+    private float speed;
+    private float rotationSpeed;
+    private Vector2 moveInput;
+    private Animator animator;
++   private Interactable interactableObj;
+
+    [SerializeField] private float moveSpeedConst = 5.0f;
+    [SerializeField] private float rotationSpeedConst = 5.0f;
+
+    void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+        animator = GetComponent<Animator>();
+    }
+
+    void FixedUpdate()
+    {
+        speed = moveInput.y * moveSpeedConst;
+        rotationSpeed = moveInput.x * rotationSpeedConst;
+
+        rb.velocity = transform.forward * speed + new Vector3(0f, rb.velocity.y, 0f);
+        rb.angularVelocity = new Vector3(0, rotationSpeed, 0);
+    }
+
+    public void OnMove(InputAction.CallbackContext context)
+    {
+        moveInput = context.ReadValue<Vector2>();
+        animator.SetFloat("speed", moveInput.y);
+        animator.SetFloat("rotate", moveInput.x);
+    }
+
++   private void OnTriggerEnter(Collider other)
++   {
++      if (other.gameObject.TryGetComponent<Interactable>(out var obj))
++       {
++           interactableObj = obj;
++       }
++   }
+    
++   private void OnTriggerExit(Collider other)
++   {
++       if (other.gameObject.TryGetComponent<Interactable>(out var obj) && obj == interactableObj)
++       {
++           interactableObj = null;
++       }
++   }
+
++   public void OnInteract(InputAction.CallbackContext context)
++   {
++       if (context.performed)
++       {
++           interactableObj?.Interact();
++       }
++  }
+}
+```
+
+/Assets/UnityChanAdventure にある InputActions を開いて、`Actions` に `+` を押して `Interact` を追加してください。キーはWASDを登録したときと同じように、 `Binding` の `Path` をクリックして行います。 キーボードの `E` を割り当てました。キーを割り当てられたら閉じて保存してください。
+
+![alt text](./img/12.2.14.webp)
+
+次は Main シーンを開いて、 ヒエラルキーの `GameManager` の Player Input コンポーネントで、 Events の Main の `Interact` の `+` を押して、 Main シーンにある `unitychan` をドラッグアンドドロップしてください。そして、 `nofunction` を `UnityChanController` の `OnInteract` に変更してください。
+
+![alt text](./img/12.2.15.webp)
+
+実行して、ドアに近づいて `E` を押すとドアが開くことを確認してください。
+
+![alt text](./img/12.2.2.gif)
+
+はじめにドアが開けっ放しになってしまっています。これは、アニメーションのステートマシンが開始されたとき、はじめに `DoorOpen` から開始されるせいです。`DoorAnimatorController` を開いて、 `DoorClose` を右クリックして、 `Set as Layer Default State` を選択してください。すると、 `DoorClose` が開始されるようになります。
+
+![alt text](./img/12.2.16.png)
+
+## 12.4. 家の中でカメラをUnityちゃんに近づけさせる
+
+家の中に入ったら、 Unityちゃんが見えなくなってしまいます。
+
+![alt text](./img/12.3.1.png)
+
+`unitychan` プレハブを開いて、 `FreeLook Camera` の インスペクターで `CinemachineFreeLook`コンポーネントの下の方にある `Extensions` の `Add Extension` で `(select)` を押して `Cinemachine Collider` を追加してください。これで、カメラが追従するオブジェクトとの間に、他のコライダーがあると、カメラが追従するオブジェクトに近づくようになります。
+
+![alt text](./img/12.3.2.webp)
+
+実行して、家の中に入ったらカメラが Unityちゃんに近づくことを確認してください。
+
+![alt text](./img/12.3.1.gif)
+
+# 13. 夜にする
+
+ここでは、夜にするために、夜の Skybox を設定します。 skybox はスクリプトから変更することもできます。
+
+## Skybox を作る
+
+`DaySkybox` を作るときのように夜の Skybox も作ります。  `/Assets/UnityChanAdventure/Materials` の中で右クリックして、`Create` -> `Material` を選択してください。名前は `NightSkybox` にしました。そして Shader を `Skybox/Procedural` に変更してください。
+
+![alt text](./img/13.1.1.webp)
+
+`NightSkybox` マテリアルの `Spherical` に `/Assets/UnityChanAdventure/Textures` の中にある夜の空の画像をドラッグアンドドロップしてください。
+
+![alt text](./img/13.1.2.webp)
+
+## Skybox を変更する
+
+/Assets/UnityChanAdventure/Scripts フォルダに `SkyboxController.cs` を作成して以下のスクリプトを書いてください。
+
+```csharp title="SkyboxController.cs"
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class SkyboxController : MonoBehaviour
+{
+    [SerializeField] private Material daySkybox;
+    [SerializeField] private Material nightSkybox;
+    [SerializeField] private Light sun;
+
+    public void ChangeSkybox()
+    {
+        if (RenderSettings.skybox == daySkybox)
+        {
+            RenderSettings.skybox = nightSkybox;
+            sun.intensity = 0.1f;
+        }
+        else
+        {
+            RenderSettings.skybox = daySkybox;
+            sun.intensity = 1.0f;
+        }
+    }
+}
+```
+
+/Assets/UnityChanAdventure/Prefabs の中にある `GameManager` プレハブに `SkyboxController` をアタッチして、 `Day Skybox` と `Night Skybox` にそれぞれ `DaySkybox` と `NightSkybox` をドラッグアンドドロップしてください。
+
+![alt text](./img/13.1.3.webp)
+
+![alt text](./img/13.1.4.webp)
+
+Q キーを押すと、切り替わるようにします。 /Assets/UnityChanAdventure にある InputActions を開いて、`Actions` に `+` を押して `DayChange` を追加してください。キーはWASDを登録したときと同じように、 `Binding` の `Path` をクリックして行います。 キーボードの `Q` を割り当てました。キーを割り当てられたら閉じて保存してください。
+
+![alt text](./img/13.1.5.webp)
+
+次は Main シーンを開いて、 ヒエラルキーの `GameManager` の Player Input コンポーネントで、 Events の Main の `DayChange` の `+` を押して、 Main シーンにある `GameManager` をドラッグアンドドロップしてください。そして、 `nofunction` を `SkyboxController` の `ChangeSkybox` に変更してください。そして、 `GameManager` の `Sum` に `Directional Light` をドラッグアンドドロップしてください。
+
+![alt text](./img/13.1.6.webp)
+
+実行して、 `Q` キーを押すと、昼と夜が切り替わることを確認してください。
+
+![alt text](./img/13.1.1.gif)
+
+# 14. Volume を使って Post Processing を設定する
+
+ここでは、Volume を使って Post Processing を設定します。Post Processing は、カメラに対して、エフェクトをかけることができます。今回は、Bloom、Motion Blur、Depth Of Fieldをつけます。
+
+## 14.1. Volume を作成する
+
+`/Assets/UnityChanAdventure/Prefabs` の中に `Create` -> `Prefab` を選択してください。名前は `Volume` にしました。
+
+![alt text](./img/14.1.1.webp)
+
+`Volume` プレハブを開いて、`Add Component` で `Volume` を追加してください。そして、`Add Component` で `Volume` を追加してください。そして `Volume` の `Profile` に `New` を押してください。 `New` を押すと、 `Volume Profile` が /Assets に作成されます。
+
+![alt text](./img/14.1.2.webp)
+
+## 14.2. Bloom
+
+Bloom は、明るい部分をぼかして、光の輝きを表現するエフェクトです。 `Volume` プレハブを開いて、 `Volume` コンポーネントの `Add Override` で `Post-processing` -> `Blooom` を追加してください。そして、 `Intensity` にチェックを付け、 `1` にしてください。`Intensity` は強さです。
+
+![alt text](./img/14.1.3.webp)
+
+`Main` シーンを開いて、`Main Camera` を選択して、`Camera` コンポーネントの `Rendering` の `Post Processing` のチェックを入れてください(`Rendering` の `▶` を押すと出てきます)。そして、 `Volume` プレハブを `Main` シーンにドラッグアンドドロップしてください。
+
+![alt text](./img/14.1.4.webp)
+
+実行して、Bloom がかかっていることを確認してください。夜にすると、Bloom がわかりやすくなります。以下の画像は右が Bloom なし、左が Bloom ありです。
+
+![alt text](./img/14.1.5.webp)
+
+## 14.3. Motion Blur
+
+Motion Blur は、動いているオブジェクトをぼかして、動きを表現するエフェクトです。 `Volume` プレハブを開いて、 `Volume` コンポーネントの `Add Override` で `Post-processing` -> `Motion Blur` を追加してください。そして、 `Intensity` にチェックを付け、 `0.5` にしてください。 `Intensity` は強さです。また、 `Quality` は `Medium` にしてください(モーションブラーは重いので、パソコンのスペックによって、 `Low` や `High` にしましょう)。
+
+![alt text](./img/14.3.1.webp)
+
+実行して、Motion Blur がかかっていることを確認してください。少し残像が出るようになります。
+
+![alt text](./img/14.3.1.gif)
+
+## 14.4. Depth Of Field
+
+Depth Of Field は、焦点を合わせることで、前後のオブジェクトをぼかすエフェクトです。 `Volume` プレハブを開いて、 `Volume` コンポーネントの `Add Override` で `Post-processing` -> `Depth Of Field` を追加してください。そして、 `Mode` にチェックを入れて、 `Gaussian` にしてください。 `Start` と `End` にチェックを入れてください。 それぞれの数値は、焦点の範囲です。デフォルトのままでもOKですが、お好みで変更してください。
+
+![alt text](./img/14.4.1.webp)
+
+実行して、Depth Of Field がかかっていることを確認してください。近くにあるものはちゃんと写って、遠くにあるものはぼやけていることがわかります。
+
+![alt text](./img/14.4.2.png)
+
+# 15. まとめ
+
+とりあえず一旦ここで終わりにします。今回は、Unityちゃんを操作できるようにし、ステージを作り、家を置き、カメラを設定し、空を作り、夜にする、Post Processing を設定しました。Unity は、とても広い機能を持っているので、まだまだいろいろなことができます。続きは発展編でやります！
