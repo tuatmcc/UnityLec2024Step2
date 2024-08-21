@@ -504,7 +504,7 @@ Terrain では、地形を作るときと同じように、塗るようにして
 
 ## 11.1. Skybox のマテリアルを作成する。
 
-`/Assets/UnityChanAdventure/Materials` の中で右クリックして、`Create` -> `Material` を選択してください。名前は `DaySkybox` にしました。
+`/Assets/UnityChanAdventure/Materials` の中で右クリックして、`Create` -> `Material` を選択してください。名前は `DaySkybox` にしました。また、下の画像のようにDaySkyboxのインスペクターの中のshaderをPanoramicに変更してください。
 
 ![alt text](./img/11.1.1.webp)
 
