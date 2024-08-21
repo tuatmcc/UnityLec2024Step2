@@ -719,3 +719,66 @@ public class UnityChanController : MonoBehaviour
 実行して、家の中に入ったらカメラが Unityちゃんに近づくことを確認してください。
 
 ![alt text](./img/12.3.1.gif)
+
+# 13. 夜にする
+
+ここでは、夜にするために、夜の Skybox を設定します。 skybox はスクリプトから変更することもできます。
+
+## Skybox を作る
+
+`DaySkybox` を作るときのように夜の Skybox も作ります。  `/Assets/UnityChanAdventure/Materials` の中で右クリックして、`Create` -> `Material` を選択してください。名前は `NightSkybox` にしました。そして Shader を `Skybox/Procedural` に変更してください。
+
+![alt text](./img/13.1.1.webp)
+
+`NightSkybox` マテリアルの `Spherical` に `/Assets/UnityChanAdventure/Textures` の中にある夜の空の画像をドラッグアンドドロップしてください。
+
+![alt text](./img/13.1.2.webp)
+
+## Skybox を変更する
+
+/Assets/UnityChanAdventure/Scripts フォルダに `SkyboxController.cs` を作成して以下のスクリプトを書いてください。
+
+```csharp title="SkyboxController.cs"
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class SkyboxController : MonoBehaviour
+{
+    [SerializeField] private Material daySkybox;
+    [SerializeField] private Material nightSkybox;
+    [SerializeField] private Light sun;
+
+    public void ChangeSkybox()
+    {
+        if (RenderSettings.skybox == daySkybox)
+        {
+            RenderSettings.skybox = nightSkybox;
+            sun.intensity = 0.1f;
+        }
+        else
+        {
+            RenderSettings.skybox = daySkybox;
+            sun.intensity = 1.0f;
+        }
+    }
+}
+```
+
+/Assets/UnityChanAdventure/Prefabs の中にある `GameManager` プレハブに `SkyboxController` をアタッチして、 `Day Skybox` と `Night Skybox` にそれぞれ `DaySkybox` と `NightSkybox` をドラッグアンドドロップしてください。
+
+![alt text](./img/13.1.3.webp)
+
+![alt text](./img/13.1.4.webp)
+
+Q キーを押すと、切り替わるようにします。 /Assets/UnityChanAdventure にある InputActions を開いて、`Actions` に `+` を押して `DayChange` を追加してください。キーはWASDを登録したときと同じように、 `Binding` の `Path` をクリックして行います。 キーボードの `Q` を割り当てました。キーを割り当てられたら閉じて保存してください。
+
+![alt text](./img/13.1.5.webp)
+
+次は Main シーンを開いて、 ヒエラルキーの `GameManager` の Player Input コンポーネントで、 Events の Main の `DayChange` の `+` を押して、 Main シーンにある `GameManager` をドラッグアンドドロップしてください。そして、 `nofunction` を `SkyboxController` の `ChangeSkybox` に変更してください。そして、 `GameManager` の `Sum` に `Directional Light` をドラッグアンドドロップしてください。
+
+![alt text](./img/13.1.6.webp)
+
+実行して、 `Q` キーを押すと、昼と夜が切り替わることを確認してください。
+
+![alt text](./img/13.1.1.gif)
