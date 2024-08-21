@@ -386,6 +386,8 @@ public class UnityChanController : MonoBehaviour
 
 Unity のアニメーションはステートマシンで切り替えます。現在再生したいアニメーションを1つのステートに設定します。あるステートを再生中に、Animator Controller で定義したパラメーターで、遷移条件に合う矢印(transition)があれば、そのステートに遷移します。パラメーターの種類は Integer、 Float、 Bool、 Trigger の4種類があり、それぞれ整数、実数、真偽値、トリガーです。トリガーは True にすると遷移後、自動で False になります。
 
+アニメーションのパラメーターは、  `SetFloat` でパラメーターの名前を String で指定して変更できます。 `Animator.StringToHash` を使うと、アニメーションのパラメーターの変更が少し軽くなったりします。
+
 # 9. CinemaMachine でカメラを設定する
 
 ここでは、CinemaMachine を使ってカメラを設定します。
